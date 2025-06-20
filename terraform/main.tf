@@ -1,12 +1,15 @@
 provider "aws" {
-  region     = "ap-northeast-2"
+  region = "ap-northeast-2"
 }
 
 resource "aws_instance" "web" {
-  ami           = "ami-0c9c942bd7bf113a2"  # Amazon Linux 2 AMI (서울 리전)
-  instance_type = "t2.micro"
+  ami                         = "ami-0c9c942bd7bf113a2"
+  instance_type               = "t2.micro"
+  subnet_id                   = "subnet-0c337f838ab531e90"
+  vpc_security_group_ids      = ["sg-083c47e5d04e47714"]
+  associate_public_ip_address = true
 
   tags = {
-    Name = "TerraformEC2"
+    Name = "existing-vpc-instance"
   }
 }
